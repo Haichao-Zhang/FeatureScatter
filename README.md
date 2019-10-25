@@ -10,7 +10,7 @@ More information can be found on the project page: https://sites.google.com/site
 The training environment (PyTorch and dependencies) can be installed as follows:
 ```
 git clone https://github.com/Haichao-Zhang/FeatureScatter.git
-cd feature_scatter
+cd FeatureScatter
 python setup.py install
 ```
 
