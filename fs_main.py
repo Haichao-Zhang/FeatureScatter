@@ -272,10 +272,10 @@ def train_fun(epoch, net):
         optimizer.zero_grad()
 
         # forward
-        outputs, loss_fs, flag_out, _, _ = net(inputs.detach(), targets)
+        outputs, loss_fs = net(inputs.detach(), targets)
 
         optimizer.zero_grad()
-        loss = loss_fs
+        loss = loss_fs.mean()
         loss.backward()
 
         optimizer.step()
@@ -288,7 +288,7 @@ def train_fun(epoch, net):
                 adv_acc = get_acc(outputs, targets)
             iterator.set_description(str(adv_acc))
 
-            nat_outputs, _, _, _, _ = net(inputs, targets, attack=False)
+            nat_outputs, _ = net(inputs, targets, attack=False)
             nat_acc = get_acc(nat_outputs, targets)
 
             print(

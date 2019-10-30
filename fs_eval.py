@@ -158,9 +158,7 @@ def test(epoch, net):
 
         pert_inputs = inputs.detach()
 
-        outputs, _, _, pert_inputs, pert_i = net(pert_inputs,
-                                                 targets,
-                                                 batch_idx=batch_idx)
+        outputs, _ = net(pert_inputs, targets, batch_idx=batch_idx)
 
         loss = criterion(outputs, targets)
         test_loss += loss.item()
