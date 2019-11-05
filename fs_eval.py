@@ -20,7 +20,7 @@ import utils
 
 from attack_methods import Attack_None, Attack_PGD
 
-from utils import softCrossEntropy
+from utils import softCrossEntropy, CWLoss
 
 parser = argparse.ArgumentParser(
     description='Feature Scattering Adversarial Training')
@@ -141,7 +141,18 @@ config_pgd = {
     'epsilon': 8.0 / 255 * 2,
     'num_steps': 20,
     'step_size': 2.0 / 255 * 2,
-    'random_start': True
+    'random_start': True,
+    'loss_func': torch.nn.CrossEntropyLoss(reduction='none')
+}
+
+config_cw = {
+    'train': False,
+    'targeted': False,
+    'epsilon': 8.0 / 255 * 2,
+    'num_steps': 20,
+    'step_size': 2.0 / 255 * 2,
+    'random_start': True,
+    'loss_func': CWLoss(args.num_classes)
 }
 
 
@@ -195,12 +206,15 @@ for attack_idx in range(attack_num):
         print('-----natural non-adv mode -----')
         # config is only dummy, not actually used
         net = Attack_None(basic_net, config_natural)
-    elif args.attack_method == 'fgsm':
+    elif args.attack_method.upper() == 'FGSM':
         print('-----FGSM adv mode -----')
         net = Attack_PGD(basic_net, config_fgsm)
-    elif args.attack_method == 'pgd':
+    elif args.attack_method.upper() == 'PGD':
         print('-----PGD adv mode -----')
         net = Attack_PGD(basic_net, config_pgd)
+    elif args.attack_method.upper() == 'CW':
+        print('-----CW adv mode -----')
+        net = Attack_PGD(basic_net, config_cw)
     else:
         raise Exception(
             'Should be a valid attack method. The specified attack method is: {}'

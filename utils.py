@@ -41,7 +41,7 @@ class softCrossEntropy(nn.Module):
         self.reduce = reduce
         return
 
-    def forward(self, inputs, target):
+    def forward(self, inputs, targets):
         """
         :param inputs: predictions
         :param target: target labels in vector form
@@ -50,8 +50,38 @@ class softCrossEntropy(nn.Module):
         log_likelihood = -F.log_softmax(inputs, dim=1)
         sample_num, class_num = target.shape
         if self.reduce:
-            loss = torch.sum(torch.mul(log_likelihood, target)) / sample_num
+            loss = torch.sum(torch.mul(log_likelihood, targets)) / sample_num
         else:
-            loss = torch.sum(torch.mul(log_likelihood, target), 1)
+            loss = torch.sum(torch.mul(log_likelihood, targets), 1)
+
+        return loss
+
+
+class CWLoss(nn.Module):
+    def __init__(self, num_classes, margin=50, reduce=True):
+        super(CWLoss, self).__init__()
+        self.num_classes = num_classes
+        self.margin = margin
+        self.reduce = reduce
+        return
+
+    def forward(self, logits, targets):
+        """
+        :param inputs: predictions
+        :param targets: target labels
+        :return: loss
+        """
+        onehot_targets = one_hot_tensor(targets, self.num_classes,
+                                        targets.device)
+
+        self_loss = torch.sum(onehot_targets * logits, dim=1)
+        other_loss = torch.max(
+            (1 - onehot_targets) * logits - onehot_targets * 1000, dim=1)[0]
+
+        loss = -torch.sum(torch.clamp(self_loss - other_loss + self.margin, 0))
+
+        if self.reduce:
+            sample_num = onehot_targets.shape[0]
+            loss = loss / sample_num
 
         return loss

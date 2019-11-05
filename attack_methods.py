@@ -44,6 +44,7 @@ class Attack_PGD(nn.Module):
         self.step_size = config['step_size']
         self.epsilon = config['epsilon']
         self.num_steps = config['num_steps']
+        self.loss_func = config['loss_func']
         self.train_flag = True if 'train' not in config.keys(
         ) else config['train']
 
@@ -74,8 +75,6 @@ class Attack_PGD(nn.Module):
 
         num_classes = targets_prob.size(1)
 
-        loss_fun = torch.nn.CrossEntropyLoss(reduction='none')
-
         outputs = aux_net(inputs)[0]
         targets_prob = F.softmax(outputs.float(), dim=1)
         y_tensor_adv = targets
@@ -94,7 +93,7 @@ class Attack_PGD(nn.Module):
                 x.grad.data.fill_(0)
             aux_net.eval()
             logits = aux_net(x)[0]
-            loss = loss_fun(logits, y_tensor_adv)
+            loss = self.loss_func(logits, y_tensor_adv)
             loss = loss.mean()
             aux_net.zero_grad()
             loss.backward()
