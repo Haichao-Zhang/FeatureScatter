@@ -44,7 +44,9 @@ class Attack_PGD(nn.Module):
         self.step_size = config['step_size']
         self.epsilon = config['epsilon']
         self.num_steps = config['num_steps']
-        self.loss_func = config['loss_func']
+        self.loss_func = torch.nn.CrossEntropyLoss(
+            reduction='none') if 'loss_func' not in config.keys(
+            ) else config['loss_func']
         self.train_flag = True if 'train' not in config.keys(
         ) else config['train']
 
