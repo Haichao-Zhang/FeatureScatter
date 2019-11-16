@@ -44,11 +44,11 @@ class softCrossEntropy(nn.Module):
     def forward(self, inputs, targets):
         """
         :param inputs: predictions
-        :param target: target labels in vector form
+        :param targets: target labels in vector form
         :return: loss
         """
         log_likelihood = -F.log_softmax(inputs, dim=1)
-        sample_num, class_num = target.shape
+        sample_num, class_num = targets.shape
         if self.reduce:
             loss = torch.sum(torch.mul(log_likelihood, targets)) / sample_num
         else:
