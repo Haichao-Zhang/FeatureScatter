@@ -2,7 +2,7 @@
 
 ## Introduction
 This is the implementation of the
-Feature-Scattering Adversarial Training, which is a training method for improving model robustness against adversarial attacks. It advocates the usage of an unsupervised feature-scattering procedure for adversarial perturbation generation, which is effective for overcoming label leaking and improving model robustness.
+["Feature-Scattering Adversarial Training "](https://papers.nips.cc/paper/8459-defense-against-adversarial-attacks-using-feature-scattering-based-adversarial-training.pdf), which is a training method for improving model robustness against adversarial attacks. It advocates the usage of an unsupervised feature-scattering procedure for adversarial perturbation generation, which is effective for overcoming label leaking and improving model robustness.
 More information can be found on the project page: https://sites.google.com/site/hczhang1/projects/feature_scattering
 
 ## Usage
@@ -37,8 +37,7 @@ If you find this work is useful, please cite the following:
 ```
 @inproceedings{feature_scatter,
     author = {Haichao Zhang and Jianyu Wang},
-    title  = {Defense Against Adversarial Attacks Using Feature Scattering-based
-               Adversarial Training},
+    title  = {Defense Against Adversarial Attacks Using Feature Scattering-based Adversarial Training},
     booktitle = {Advances in Neural Information Processing Systems},
     year = {2019}
 }
