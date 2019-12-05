@@ -1,4 +1,4 @@
-# Feature Scattering Adversarial Training
+# Feature Scattering Adversarial Training (NeurIPS 2019)
 
 ## Introduction
 This is the implementation of the
