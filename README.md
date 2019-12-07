@@ -13,6 +13,7 @@ git clone https://github.com/Haichao-Zhang/FeatureScatter.git
 cd FeatureScatter
 python setup.py install
 ```
+Tested under Python 3.5.2 and PyTorch 1.2.0.
 
 ### Train
 Specify the path for saving the trained models in ```fs_train.sh```, and then run
