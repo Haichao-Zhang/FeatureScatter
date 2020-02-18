@@ -15,8 +15,6 @@ import random
 import scipy.io
 
 import torch
-from torch.optim import Optimizer
-
 
 def one_hot_tensor(y_batch_tensor, num_classes, device):
     y_tensor = torch.cuda.FloatTensor(y_batch_tensor.size(0),
