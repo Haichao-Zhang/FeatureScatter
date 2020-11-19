@@ -11,6 +11,10 @@ The training environment (PyTorch and dependencies) can be installed as follows:
 ```
 git clone https://github.com/Haichao-Zhang/FeatureScatter.git
 cd FeatureScatter
+
+python3 -m venv .venv
+source .venv/bin/activate
+
 python setup.py install
 ```
 Tested under Python 3.5.2 and PyTorch 1.2.0.
