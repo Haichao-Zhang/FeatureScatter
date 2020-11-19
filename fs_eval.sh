@@ -1,6 +1,6 @@
 export PYTHONPATH=./:$PYTHONPATH
 model_dir=~/models/feature_scatter_cifar10/
-CUDA_VISIBLE_DEVICES=1 python fs_eval.py \
+CUDA_VISIBLE_DEVICES=1 python3 fs_eval.py \
     --model_dir=$model_dir \
     --init_model_pass=latest \
     --attack=True \
