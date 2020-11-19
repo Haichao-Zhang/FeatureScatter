@@ -15,7 +15,7 @@ cd FeatureScatter
 python3 -m venv .venv
 source .venv/bin/activate
 
-python setup.py install
+python3 setup.py install
 ```
 Tested under Python 3.5.2 and PyTorch 1.2.0.
 
