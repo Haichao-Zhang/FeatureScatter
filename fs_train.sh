@@ -1,7 +1,7 @@
 export PYTHONPATH=./:$PYTHONPATH
 model_dir=~/models/feature_scatter_cifar10/
 mkdir -p $model_dir
-CUDA_VISIBLE_DEVICES=0 python fs_main.py \
+CUDA_VISIBLE_DEVICES=0 python3 fs_main.py \
     --resume \
     --adv_mode='feature_scatter' \
     --lr=0.1 \
