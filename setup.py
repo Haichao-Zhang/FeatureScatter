@@ -8,6 +8,6 @@ setup(
         'tqdm',
         'scipy',
         'torchvision',
-    ],  # And any other dependencies foo needs
+    ],
     packages=find_packages(),
 )
