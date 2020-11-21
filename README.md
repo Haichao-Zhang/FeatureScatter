@@ -16,6 +16,8 @@ python3 -m venv .venv
 source .venv/bin/activate
 
 python3 setup.py install
+
+(or pip install -e .)
 ```
 Tested under Python 3.5.2 and PyTorch 1.2.0.
 
